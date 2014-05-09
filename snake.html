@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snake!</title>
+  <script src="jquery.js"></script>
+  <script src="snake_ui.js"></script>
+  <script src="snake.js"></script>
+  <link href="snake.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+  <h1>Snake</h1>
+  <div id="board"></div>
+  <script>
+  var snake = new Game.View($("#board"));
+  snake.start();
+  snake.render();
+  </script>
+</body>
+</html>
