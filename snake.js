@@ -5,7 +5,7 @@
 
     var Snake = Game.Snake = function () {
         this.dir = "N";
-        this.segments = [new Coord(7,7)];
+        this.segments = [new Coord(parseInt(Game.SIZE / 2), parseInt(Game.SIZE / 2))];
     };
 
     Snake.prototype.move = function () {
@@ -65,9 +65,10 @@
            if (this.segments[i].x === this.segments[0].x &&
                 this.segments[i].y === this.segments[0].y) {
                     clearInterval(int);
-                    alert("Game Over!");
+                    return true;
             }
         }
+        return false;
     };
 
     Coord.prototype.plus = function (coord) {
@@ -88,9 +89,14 @@
     };
 
     var Board = Game.Board = function () {
-        this.score = 0;
+        this.highScore = 0;
+        this.setupBoard();
+    };
+    
+    Board.prototype.setupBoard = function () {
         this.snake = new Snake();
         this.apple = null;
+        this.score = 0;
     };
 
     Board.prototype.render = function () {
@@ -127,7 +133,8 @@
         if (this.snake.segments[0].x === this.apple[0] &&
             this.snake.segments[0].y === this.apple[1]) {
             this.snake.grow();
-            this.score += Math.floor(Math.random() * 25 + 75);
+            this.score += Math.floor(Math.random() * 10 + 90);
+            this.highScore = Math.max(this.score, this.highScore);
             this.addApple();
         }
     };
