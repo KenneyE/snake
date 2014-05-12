@@ -1,7 +1,55 @@
-body * {
-    font-family: Monaco;
+body  {
+    font-family: 'Shadows Into Light', cursive;
+    background-color: #336;
+    font-size: 25px;
+    color: red;
+}
+
+.container {
+    margin: auto;
+    width: 480px;
+    text-align: center;
+    text-shadow: 2px 2px #003;
 }
 
 h1 {
-    color: red;
+    margin: -10px 0 -10px 0;
+}
+
+p {
+    font-size: 30px;
+}
+
+
+div.square {
+    width: 40px;
+    height: 40px;
+    float:left;
+    border-radius: 7px;
+}
+
+div.snake {
+    z-index: 100;
+    background-color: #922;
+    box-shadow: 1px 1px 3px #400 inset;
+}
+
+div.empty {
+    background-color: #aaa;
+    box-shadow: 1px 1px 3px #333 inset;
+
+/*    outline: #777 solid 1px;*/
+}
+
+div.apple {
+    background-color: #272;
+    box-shadow: inset 1px 2px 3px #050;
+}
+
+
+
+#board {
+/*    width: 600px;*/
+    margin: 0 auto;
+    box-shadow: 1px 2px 3px black;
 }

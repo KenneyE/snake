@@ -4,7 +4,8 @@
     var View = Game.View = function ($el) {
         this.$el = $el;
         this.board = new Game.Board();
-    }
+        this.score = 0;
+    };
 
     View.prototype.start = function () {
         $(window).on('keydown', this.handleKeyEvent.bind(this));
@@ -26,11 +27,14 @@
             "37": "W"
         };
 
-        this.board.snake.turn(keyMap[event.keyCode]);
-    }
+        if ([38, 39, 40, 37].indexOf(event.keyCode) != -1) {
+            this.board.snake.turn(keyMap[event.keyCode]);
+        }
+    };
 
     View.prototype.render = function (event) {
         this.$el.html(this.board.render());
-    }
+        $("#score").html("Score: " + this.board.score)
+    };
 
 }(this));

@@ -1,7 +1,7 @@
 (function(root) {
     var Game = root.Game = (root.Game || {});
 
-    Game.SIZE = 30;
+    Game.SIZE = 12;
 
     var Snake = Game.Snake = function () {
         this.dir = "N";
@@ -43,11 +43,11 @@
             "N": "S",
             "S": "N",
             "E": "W"
-        }
+        };
 
         if (illegalMoveMap[this.dir] !== direction) {
             this.dir = direction;
-        };
+        }
     };
 
     var Coord = Game.Coord = function (x, y) {
@@ -56,7 +56,7 @@
     };
 
     Snake.prototype.grow = function () {
-        var lastSeg = this.segments[this.segments.length - 1]
+        var lastSeg = this.segments[this.segments.length - 1];
         this.segments[this.segments.length] = new Coord(lastSeg.x, lastSeg.y);
     };
 
@@ -68,7 +68,7 @@
                     alert("Game Over!");
             }
         }
-    }
+    };
 
     Coord.prototype.plus = function (coord) {
 
@@ -88,6 +88,7 @@
     };
 
     var Board = Game.Board = function () {
+        this.score = 0;
         this.snake = new Snake();
         this.apple = null;
     };
@@ -97,21 +98,20 @@
         for (var i = 0; i < Game.SIZE; i++) {
             grid.push([]);
             for (var j = 0; j < Game.SIZE; j++) {
-                    grid[i].push(".");
+                    grid[i].push("<div class='square empty'></div>");
             }
-            grid[i].push("<br>");
+            // grid[i].push("<br>");
         }
 
 
+        grid[this.apple[0]][this.apple[1]] = "<div class='square apple'></div>";
 
-        grid[this.apple[0]][this.apple[1]] = 'a';
-
-        for (var i = 0; i < this.snake.segments.length; i++) {
-            grid[this.snake.segments[i].x][this.snake.segments[i].y] = '$';
+        for (i = 0; i < this.snake.segments.length; i++) {
+            grid[this.snake.segments[i].x][this.snake.segments[i].y] = "<div class='square snake'></div>";
         }
 
-        for (var i = 0;i < grid.length; i++){
-            grid[i] = grid[i].join(" ");
+        for (i = 0;i < grid.length; i++){
+            grid[i] = grid[i].join("");
         }
         return grid.join('');
     };
@@ -127,9 +127,10 @@
         if (this.snake.segments[0].x === this.apple[0] &&
             this.snake.segments[0].y === this.apple[1]) {
             this.snake.grow();
+            this.score += Math.floor(Math.random() * 25 + 75);
             this.addApple();
         }
-    }
+    };
 
 
 }(this));
