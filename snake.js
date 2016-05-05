@@ -125,7 +125,12 @@
     Board.prototype.addApple = function () {
         var randX = Math.floor(Math.random() * Game.SIZE);
         var randY = Math.floor(Math.random() * Game.SIZE);
-        this.apple = [randX, randY];
+		
+		if (this.isSnakeSegment(randX, randY)) {
+			this.addApple();
+		} else {
+	        this.apple = [randX, randY];
+		}
     };
 
 
@@ -138,6 +143,10 @@
             this.addApple();
         }
     };
-
-
+	
+	Board.prototype.isSnakeSegment = function (xPos, yPos) {
+		return this.snake.segments.some(function (segment) {
+			return segment.x == xPos && segment.y == yPos;
+		});
+	};
 }(this));
